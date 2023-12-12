@@ -12,6 +12,6 @@ public interface TradingTransactionMapper {
     TradingTransaction entityToDomain(com.txvinh.aquariux.entity.TradingTransaction tradingTransaction);
 
     @BeanMapping(qualifiedByName = "domainToEntity")
-    com.txvinh.aquariux.entity.TradingTransaction huobiPriceToPrice(TradingTransaction tradingTransaction);
+    com.txvinh.aquariux.entity.TradingTransaction domainToEntity(TradingTransaction tradingTransaction);
     
 }

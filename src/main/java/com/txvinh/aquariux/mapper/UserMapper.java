@@ -12,6 +12,6 @@ public interface UserMapper {
     User entityToDomain(com.txvinh.aquariux.entity.User user);
 
     @BeanMapping(qualifiedByName = "domainToEntity")
-    com.txvinh.aquariux.entity.User huobiPriceToPrice(User user);
+    com.txvinh.aquariux.entity.User domainToEntity(User user);
     
 }

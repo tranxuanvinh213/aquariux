@@ -13,6 +13,6 @@ public interface CryptoWalletMapper {
     CryptoWallet entityToDomain(com.txvinh.aquariux.entity.CryptoWallet cryptoWallet);
 
     @BeanMapping(qualifiedByName = "domainToEntity")
-    com.txvinh.aquariux.entity.CryptoWallet huobiPriceToPrice(CryptoWallet cryptoWallet);
+    com.txvinh.aquariux.entity.CryptoWallet domainToEntity(CryptoWallet cryptoWallet);
     
 }
