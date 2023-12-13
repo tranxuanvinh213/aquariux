@@ -1,0 +1,153 @@
+{
+	"info": {
+		"_postman_id": "72561444-a833-46ba-bde7-10d955cd0c66",
+		"name": "Aquariux",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27715593"
+	},
+	"item": [
+		{
+			"name": "CryptoTrading",
+			"item": [
+				{
+					"name": "All price",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/prices/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"prices",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "latest Price",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/prices/latest",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"prices",
+								"latest"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "balance",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/wallet/balance",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"wallet",
+								"balance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get wallet by email",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/wallet?email=vinhit213%40gmail.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"wallet"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "vinhit213%40gmail.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "trading history",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/trading-history?email=vinhit213%40gmail.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"trading-history"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "vinhit213%40gmail.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "trade",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"action\": \"SELL\",\n    \"symbol\": \"BTCUSDT\",\n    \"amount\": 1,\n    \"price\": 10,\n    \"fee\": 0\n}\n// action value [\"SELL\", \"BUY\"] \n// symbol value [\"BTCUSDT\", \"BTCUSDT\"] ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/trade",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"trade"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
