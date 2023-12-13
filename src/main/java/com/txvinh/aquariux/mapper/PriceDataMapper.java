@@ -10,15 +10,17 @@ import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
 import org.springframework.util.StringUtils;
 
+import java.math.BigDecimal;
+
 @Mapper
 public interface PriceDataMapper {
     PriceDataMapper INSTANCE = Mappers.getMapper(PriceDataMapper.class);
 
     @BeanMapping(qualifiedByName = "binancePriceToPrice")
-    @Mapping(target = "bidPrice", expression = "java(Double.valueOf(binancePriceData.getBidPrice()))")
-    @Mapping(target = "bidQty", expression = "java(Double.valueOf(binancePriceData.getBidQty()))")
-    @Mapping(target = "askPrice", expression = "java(Double.valueOf(binancePriceData.getAskPrice()))")
-    @Mapping(target = "askQty", expression = "java(Double.valueOf(binancePriceData.getAskQty()))")
+    @Mapping(target = "bidPrice", qualifiedByName = "stringToBigDecimal")
+    @Mapping(target = "bidQty", qualifiedByName = "stringToBigDecimal")
+    @Mapping(target = "askPrice", qualifiedByName = "stringToBigDecimal")
+    @Mapping(target = "askQty", qualifiedByName = "stringToBigDecimal")
     PriceData binancePriceToPrice(BinancePriceData binancePriceData);
 
     @BeanMapping(qualifiedByName = "huobiPriceToPrice")
@@ -29,14 +31,14 @@ public interface PriceDataMapper {
     @Mapping(target = "askQty", source = "askSize")
     PriceData huobiPriceToPrice(HuobiPriceData huobiPriceData);
 
-    @Named("stringToDouble")
-    default Double stringToDouble(String val) {
+    @Named("stringToBigDecimal")
+    default BigDecimal stringToBigDecimal(String val) {
         if (!StringUtils.hasLength(val)) {
             return null;
         }
-        double result = 0;
+        BigDecimal result = BigDecimal.ZERO;
         try{
-            result = Double.parseDouble(val);
+            result = BigDecimal.valueOf(Double.parseDouble(val));
         } catch (NumberFormatException ex) {
             ex.printStackTrace();
         }

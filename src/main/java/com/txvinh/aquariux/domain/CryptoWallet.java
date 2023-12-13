@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.time.Instant;
 
 @Data
@@ -16,7 +17,7 @@ public class CryptoWallet {
     private Long id;
     private Long userId;
     private String type;
-    private Double amount;
+    private BigDecimal amount;
     @JsonProperty("created_date")
     private Instant createdDate;
     @JsonProperty("updated_date")

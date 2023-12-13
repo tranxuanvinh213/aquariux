@@ -8,6 +8,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,9 +22,9 @@ public class TradeRequest {
     @NotEmpty
     private String symbol;
     @Min(0)
-    private Double amount;
+    private BigDecimal amount;
     @Min(0)
-    private Double price;
+    private BigDecimal price;
     @Min(0)
-    private Double fee;
+    private BigDecimal fee;
 }

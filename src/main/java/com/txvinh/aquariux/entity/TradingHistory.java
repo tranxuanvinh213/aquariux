@@ -9,6 +9,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @EqualsAndHashCode(callSuper = true)
 @Data
 @AllArgsConstructor
@@ -21,7 +23,7 @@ public class TradingHistory extends AuditableEntity {
     private Long userId;
     private String type;
     private String symbol;
-    private Double amount;
-    private Double price;
+    private BigDecimal amount;
+    private BigDecimal price;
     private String status;
 }

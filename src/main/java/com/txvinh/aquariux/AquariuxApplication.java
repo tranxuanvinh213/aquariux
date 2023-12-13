@@ -11,6 +11,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
+import java.math.BigDecimal;
+
 @SpringBootApplication
 public class AquariuxApplication {
     @Bean
@@ -33,7 +35,7 @@ public class AquariuxApplication {
                     .build();
             User newUser = userService.createUser(user);
             CryptoWallet cryptoWallet = CryptoWallet.builder()
-                    .amount(50000.0)
+                    .amount(BigDecimal.valueOf(50000))
                     .type(Crypto.USDT)
                     .userId(newUser.getId())
                     .build();

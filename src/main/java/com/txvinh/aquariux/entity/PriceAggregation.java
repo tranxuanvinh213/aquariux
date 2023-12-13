@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,8 +20,8 @@ public class PriceAggregation extends AuditableEntity {
     private Long id;
     private String symbol;
     private String source;
-    private Double bidPrice;
-    private Double bidQty;
-    private Double askPrice;
-    private Double askQty;
+    private BigDecimal bidPrice;
+    private BigDecimal bidQty;
+    private BigDecimal askPrice;
+    private BigDecimal askQty;
 }

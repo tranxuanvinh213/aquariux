@@ -8,6 +8,8 @@ import com.txvinh.aquariux.domain.TradingHistory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+
 @RequiredArgsConstructor
 @Service
 public class TradingService {
@@ -24,16 +26,16 @@ public class TradingService {
         //get wallet of current user
         var cryptoWallet = cryptoWalletService.getWalletByType(request.getSymbol());
         // check amount
-        if(request.getAmount() > cryptoWallet.getAmount()) {
+        if(request.getAmount().doubleValue() > cryptoWallet.getAmount().doubleValue()) {
             return TradeResponse.builder().status(Crypto.FAIL)
                     .message("The quantity you want to sell exceeds the quantity you currently have").build();
         }
-        cryptoWallet.setAmount(cryptoWallet.getAmount() - request.getAmount());
+        cryptoWallet.setAmount(BigDecimal.valueOf(cryptoWallet.getAmount().doubleValue() - request.getAmount().doubleValue()));
         cryptoWalletService.update(cryptoWallet);
 
         var cryptoWalletUsdt = cryptoWalletService.getWalletByType(Crypto.USDT);
-        Double totalPrice = (request.getAmount() * request.getPrice()) - request.getFee();
-        cryptoWalletUsdt.setAmount(cryptoWalletUsdt.getAmount() + totalPrice);
+        Double totalPrice = (request.getAmount().doubleValue() * request.getPrice().doubleValue()) - request.getFee().doubleValue();
+        cryptoWalletUsdt.setAmount(BigDecimal.valueOf(cryptoWalletUsdt.getAmount().doubleValue() + totalPrice));
         cryptoWalletService.update(cryptoWalletUsdt);
         
         // save transaction
@@ -57,22 +59,22 @@ public class TradingService {
         request.setPrice(bestPrice.getAskPrice());
         
         // check amount
-        if(request.getAmount() > bestPrice.getAskQty()) {
+        if(request.getAmount().compareTo(bestPrice.getAskQty()) > 0 ) {
             return TradeResponse.builder().status(Crypto.FAIL)
                     .message("The quantity you want to buy exceeds the quantity market currently have").build();
         }
         
-        Double totalPrice = (request.getAmount() * request.getPrice()) - request.getFee();
+        Double totalPrice = (request.getAmount().doubleValue() * request.getPrice().doubleValue()) - request.getFee().doubleValue();
         var cryptoWalletUsdt = cryptoWalletService.getWalletByType(Crypto.USDT);
         // check balance
-        if(totalPrice > cryptoWalletUsdt.getAmount()) {
+        if(totalPrice > cryptoWalletUsdt.getAmount().doubleValue()) {
             return TradeResponse.builder().status(Crypto.FAIL)
                     .message("The balance not enough.").build();
         }
         //get wallet of current user
         var cryptoWallet = cryptoWalletService.getWalletByType(request.getSymbol());
         if(cryptoWallet != null) {
-            cryptoWallet.setAmount(cryptoWallet.getAmount() + request.getAmount());
+            cryptoWallet.setAmount(BigDecimal.valueOf(cryptoWallet.getAmount().doubleValue() + request.getAmount().doubleValue()));
             cryptoWalletService.update(cryptoWallet);
         } else {
             CryptoWallet cryptoWalletNew  = new com.txvinh.aquariux.domain.CryptoWallet();
@@ -82,7 +84,7 @@ public class TradingService {
             cryptoWalletService.create(cryptoWalletNew);
         }
         
-        cryptoWalletUsdt.setAmount(cryptoWalletUsdt.getAmount() - totalPrice);
+        cryptoWalletUsdt.setAmount(BigDecimal.valueOf(cryptoWalletUsdt.getAmount().doubleValue() - totalPrice));
         cryptoWalletService.update(cryptoWalletUsdt);
 
         // save transaction

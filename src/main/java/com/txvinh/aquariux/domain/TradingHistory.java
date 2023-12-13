@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.time.Instant;
 
 @Data
@@ -17,8 +18,8 @@ public class TradingHistory {
     private Long userId;
     private String type;
     private String symbol;
-    private Double amount;
-    private Double price;
+    private BigDecimal amount;
+    private BigDecimal price;
     private String status;
     @JsonProperty("created_date")
     private Instant createdDate;

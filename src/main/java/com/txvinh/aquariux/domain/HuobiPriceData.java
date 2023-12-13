@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
 @Builder
@@ -13,15 +15,15 @@ import lombok.Setter;
 @AllArgsConstructor
 public class HuobiPriceData {
     private String symbol;
-    private Double open;
-    private Double high;
-    private Double low;
-    private Double close;
-    private Double amount;
-    private Double vol;
-    private Double count;
-    private Double bid;
-    private Double bidSize;
-    private Double ask;
-    private Double askSize;
+    private BigDecimal open;
+    private BigDecimal high;
+    private BigDecimal low;
+    private BigDecimal close;
+    private BigDecimal amount;
+    private BigDecimal vol;
+    private BigDecimal count;
+    private BigDecimal bid;
+    private BigDecimal bidSize;
+    private BigDecimal ask;
+    private BigDecimal askSize;
 }

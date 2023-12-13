@@ -11,6 +11,7 @@ public interface PriceAggregationMapper {
     PriceAggregationMapper INSTANCE = Mappers.getMapper(PriceAggregationMapper.class);
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "bidPrice", source = "bidPrice")
     PriceAggregation map(PriceData priceData);
     
     PriceData entityToDomain(PriceAggregation priceAggregation);
