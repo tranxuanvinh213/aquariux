@@ -11,5 +11,12 @@ public class Crypto {
     public static final String ETHUSDT = "ETHUSDT";
     public static final String BTCUSDT = "BTCUSDT";
     public static final Set<String> pairsOfCrypto = Set.of(ETHUSDT, BTCUSDT);
+    
+    public static final String SUCCESS = "SUCCESS";
+    public static final String FAIL = "FAIL";
+    public static final String PENDING = "PENDING";
+
+    public static final String SELL = "SELL";
+    public static final String BUY = "BUY";
 
 }

@@ -6,8 +6,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,6 +20,8 @@ public class TradingTransaction extends AuditableEntity {
     private Long id;
     private Long userId;
     private String type;
+    private String symbol;
     private Double amount;
     private Double price;
+    private String status;
 }
