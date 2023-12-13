@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class TradingTransaction extends AuditableEntity {
+public class TradingHistory extends AuditableEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

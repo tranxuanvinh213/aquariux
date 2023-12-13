@@ -1,6 +1,6 @@
 package com.txvinh.aquariux.controller;
 
-import com.txvinh.aquariux.domain.TradingTransaction;
+import com.txvinh.aquariux.domain.TradingHistory;
 import com.txvinh.aquariux.service.TradingTransactionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,13 +12,13 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/trading-transaction")
-public class TradingTransactionController {
+@RequestMapping("/trading-history")
+public class TradingHistoryController {
     private final TradingTransactionService tradingTransactionService;
     
     @GetMapping
-    public List<TradingTransaction> getTransactionOfUser(@RequestParam String email) {
-        return tradingTransactionService.getAllTransactionOfCurrentUser(email);
+    public List<TradingHistory> getTradingHistoryOfUser(@RequestParam String email) {
+        return tradingTransactionService.getTradingHistoryOfCurrentUser(email);
         
     }
     

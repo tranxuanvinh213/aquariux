@@ -8,6 +8,8 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Service
 public class CryptoWalletService {
@@ -40,5 +42,11 @@ public class CryptoWalletService {
         var user = userService.getUserByEmail("vinhit213@gmail.com");
         var cryptoWallet = cryptoWalletRepository.findByUserIdAndType(user.getId(), type);
         return CryptoWalletMapper.INSTANCE.entityToDomain(cryptoWallet);
+    }
+
+    public List<CryptoWallet> getWalletByUserID(String email) {
+        var user = userService.getUserByEmail(email);
+        var cryptoWallet = cryptoWalletRepository.findByUserId(user.getId());
+        return cryptoWallet.stream().map(CryptoWalletMapper.INSTANCE::entityToDomain).toList();
     }
 }

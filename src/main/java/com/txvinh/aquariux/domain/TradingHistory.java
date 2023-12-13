@@ -12,7 +12,7 @@ import java.time.Instant;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class TradingTransaction {
+public class TradingHistory {
     private Long id;
     private Long userId;
     private String type;

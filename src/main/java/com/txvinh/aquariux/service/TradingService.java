@@ -4,7 +4,7 @@ import com.txvinh.aquariux.constant.Crypto;
 import com.txvinh.aquariux.domain.CryptoWallet;
 import com.txvinh.aquariux.domain.TradeRequest;
 import com.txvinh.aquariux.domain.TradeResponse;
-import com.txvinh.aquariux.domain.TradingTransaction;
+import com.txvinh.aquariux.domain.TradingHistory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -37,7 +37,7 @@ public class TradingService {
         cryptoWalletService.update(cryptoWalletUsdt);
         
         // save transaction
-        TradingTransaction tradingTransaction = TradingTransaction.builder()
+        TradingHistory tradingHistory = TradingHistory.builder()
                 .userId(user.getId())
                 .amount(request.getAmount())
                 .type(request.getAction())
@@ -45,7 +45,7 @@ public class TradingService {
                 .symbol(request.getSymbol())
                 .status(Crypto.SUCCESS)
                 .build();
-        tradingTransactionService.save(tradingTransaction);
+        tradingTransactionService.save(tradingHistory);
         
         return TradeResponse.builder().status(Crypto.SUCCESS).message("Sell successful.").build();
     }
@@ -86,7 +86,7 @@ public class TradingService {
         cryptoWalletService.update(cryptoWalletUsdt);
 
         // save transaction
-        TradingTransaction tradingTransaction = TradingTransaction.builder()
+        TradingHistory tradingHistory = TradingHistory.builder()
                 .userId(user.getId())
                 .amount(request.getAmount())
                 .type(request.getAction())
@@ -94,7 +94,7 @@ public class TradingService {
                 .symbol(request.getSymbol())
                 .status(Crypto.SUCCESS)
                 .build();
-        tradingTransactionService.save(tradingTransaction);
+        tradingTransactionService.save(tradingHistory);
 
         return TradeResponse.builder().status(Crypto.SUCCESS).message("Buy successful.").build();
     }

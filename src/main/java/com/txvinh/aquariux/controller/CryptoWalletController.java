@@ -5,7 +5,10 @@ import com.txvinh.aquariux.service.CryptoWalletService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -16,5 +19,10 @@ public class CryptoWalletController {
     @GetMapping("/balance")
     public CryptoWallet getBalance() {
         return cryptoWalletService.getBalance();
+    }
+
+    @GetMapping
+    public List<CryptoWallet> getWallets(@RequestParam String email) {
+        return cryptoWalletService.getWalletByUserID(email);
     }
 }

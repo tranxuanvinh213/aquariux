@@ -19,8 +19,10 @@ public class TradeRequest {
     @NotBlank(message = "Symbol can not blank")
     @NotEmpty
     private String symbol;
-    @Min(1)
+    @Min(0)
     private Double amount;
+    @Min(0)
     private Double price;
+    @Min(0)
     private Double fee;
 }
