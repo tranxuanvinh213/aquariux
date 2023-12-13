@@ -47,7 +47,7 @@ public class TradingService {
                 .build();
         tradingTransactionService.save(tradingTransaction);
         
-        return TradeResponse.builder().status(Crypto.SUCCESS).build();
+        return TradeResponse.builder().status(Crypto.SUCCESS).message("Sell successful.").build();
     }
 
     public TradeResponse buy (TradeRequest request) {
@@ -96,6 +96,6 @@ public class TradingService {
                 .build();
         tradingTransactionService.save(tradingTransaction);
 
-        return TradeResponse.builder().status(Crypto.SUCCESS).build();
+        return TradeResponse.builder().status(Crypto.SUCCESS).message("Buy successful.").build();
     }
 }
