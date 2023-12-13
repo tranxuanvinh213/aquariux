@@ -9,6 +9,7 @@ import com.txvinh.aquariux.domain.HuobiPriceData;
 import com.txvinh.aquariux.domain.HuobiResponse;
 import com.txvinh.aquariux.domain.PriceData;
 import com.txvinh.aquariux.service.PriceAggregateService;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -31,6 +32,7 @@ public class PriceAggregateScheduler {
     private final PriceAggregateService priceAggregateService;
     
     @Scheduled(fixedRate = 10000)
+    @Transactional
     public void fetchAndAggregatePrices() {
         log.info("START fetchAndAggregatePrices");
         List<PriceData> priceDataList = new ArrayList<>();

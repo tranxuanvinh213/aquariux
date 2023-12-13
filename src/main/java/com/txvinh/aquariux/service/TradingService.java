@@ -5,6 +5,7 @@ import com.txvinh.aquariux.domain.CryptoWallet;
 import com.txvinh.aquariux.domain.TradeRequest;
 import com.txvinh.aquariux.domain.TradeResponse;
 import com.txvinh.aquariux.domain.TradingHistory;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ public class TradingService {
     private final TradingTransactionService tradingTransactionService;
     private final PriceAggregateService priceAggregateService;
     
+    @Transactional
     public TradeResponse sell (TradeRequest request) {
         var user = userService.getUserByEmail("vinhit213@gmail.com");
         //get best price from aggregation.
@@ -34,7 +36,7 @@ public class TradingService {
         cryptoWalletService.update(cryptoWallet);
 
         var cryptoWalletUsdt = cryptoWalletService.getWalletByType(Crypto.USDT);
-        Double totalPrice = (request.getAmount().doubleValue() * request.getPrice().doubleValue()) - request.getFee().doubleValue();
+        double totalPrice = (request.getAmount().doubleValue() * request.getPrice().doubleValue()) - request.getFee().doubleValue();
         cryptoWalletUsdt.setAmount(BigDecimal.valueOf(cryptoWalletUsdt.getAmount().doubleValue() + totalPrice));
         cryptoWalletService.update(cryptoWalletUsdt);
         
@@ -52,6 +54,7 @@ public class TradingService {
         return TradeResponse.builder().status(Crypto.SUCCESS).message("Sell successful.").build();
     }
 
+    @Transactional
     public TradeResponse buy (TradeRequest request) {
         var user = userService.getUserByEmail("vinhit213@gmail.com");
         //get best price from aggregation.
@@ -64,7 +67,7 @@ public class TradingService {
                     .message("The quantity you want to buy exceeds the quantity market currently have").build();
         }
         
-        Double totalPrice = (request.getAmount().doubleValue() * request.getPrice().doubleValue()) - request.getFee().doubleValue();
+        double totalPrice = (request.getAmount().doubleValue() * request.getPrice().doubleValue()) - request.getFee().doubleValue();
         var cryptoWalletUsdt = cryptoWalletService.getWalletByType(Crypto.USDT);
         // check balance
         if(totalPrice > cryptoWalletUsdt.getAmount().doubleValue()) {
