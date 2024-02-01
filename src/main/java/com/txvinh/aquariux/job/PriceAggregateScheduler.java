@@ -12,6 +12,7 @@ import com.txvinh.aquariux.service.PriceAggregateService;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -48,7 +49,8 @@ public class PriceAggregateScheduler {
         log.info("END fetchAndAggregatePrices");
     }
 
-    private void fetchPriceDataFromHuobi(List<PriceData> priceDataList) {
+    @Async
+    void fetchPriceDataFromHuobi(List<PriceData> priceDataList) {
         HuobiResponse huobiResponse = new HuobiResponse();
         try {
             huobiResponse = restTemplate.getForObject(Crypto.HUOBI_URL, HuobiResponse.class);
@@ -67,7 +69,8 @@ public class PriceAggregateScheduler {
         }
     }
 
-    private void fetchPriceDataFromBinance(List<PriceData> priceDataList) {
+    @Async
+    void fetchPriceDataFromBinance(List<PriceData> priceDataList) {
         String jsonData = "";
         try {
             jsonData = restTemplate.getForObject(Crypto.BINANCE_URL, String.class);
